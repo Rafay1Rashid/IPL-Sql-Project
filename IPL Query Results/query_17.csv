@@ -1,0 +1,109 @@
+year,team,total_matches,total_runs,avg_score_per_season
+2008,Kings XI Punjab,15,4928,328.5333
+2008,Rajasthan Royals,16,5202,325.1250
+2008,Deccan Chargers,14,4458,318.4286
+2008,Chennai Super Kings,16,5040,315.0000
+2008,Delhi Daredevils,14,4236,302.5714
+2008,Kolkata Knight Riders,13,3884,298.7692
+2008,Mumbai Indians,14,4160,297.1429
+2008,Royal Challengers Bangalore,14,3966,283.2857
+2009,Chennai Super Kings,14,4462,318.7143
+2009,Deccan Chargers,16,4816,301.0000
+2009,Mumbai Indians,13,3794,291.8462
+2009,Delhi Daredevils,15,4262,284.1333
+2009,Kings XI Punjab,14,3856,275.4286
+2009,Kolkata Knight Riders,12,3214,267.8333
+2009,Royal Challengers Bangalore,16,2280,142.5000
+2009,Rajasthan Royals,12,1538,128.1667
+2010,Mumbai Indians,16,5476,342.2500
+2010,Kings XI Punjab,13,4284,329.5385
+2010,Chennai Super Kings,15,4918,327.8667
+2010,Rajasthan Royals,14,4358,311.2857
+2010,Delhi Daredevils,14,4310,307.8571
+2010,Kolkata Knight Riders,14,4288,306.2857
+2010,Royal Challengers Bangalore,16,4802,300.1250
+2010,Deccan Chargers,16,4748,296.7500
+2011,Chennai Super Kings,16,5120,320.0000
+2011,Kings XI Punjab,14,4448,317.7143
+2011,Delhi Daredevils,13,4062,312.4615
+2011,Royal Challengers Bangalore,16,4938,308.6250
+2011,Deccan Chargers,14,4280,305.7143
+2011,Mumbai Indians,16,4576,286.0000
+2011,Pune Warriors,13,3550,273.0769
+2011,Kochi Tuskers Kerala,14,3802,271.5714
+2011,Kolkata Knight Riders,15,4046,269.7333
+2011,Rajasthan Royals,13,3374,259.5385
+2012,Royal Challengers Bangalore,15,4944,329.6000
+2012,Chennai Super Kings,18,5662,314.5556
+2012,Rajasthan Royals,16,5032,314.5000
+2012,Deccan Chargers,15,4624,308.2667
+2012,Kings XI Punjab,16,4780,298.7500
+2012,Kolkata Knight Riders,17,5008,294.5882
+2012,Delhi Daredevils,18,5290,293.8889
+2012,Pune Warriors,16,4642,290.1250
+2012,Mumbai Indians,17,4924,289.6471
+2013,Royal Challengers Bangalore,14,4578,327.0000
+2013,Mumbai Indians,19,5950,313.1579
+2013,Chennai Super Kings,18,5556,308.6667
+2013,Kings XI Punjab,16,4856,303.5000
+2013,Rajasthan Royals,18,5410,300.5556
+2013,Kolkata Knight Riders,16,4580,286.2500
+2013,Pune Warriors,16,4524,282.7500
+2013,Delhi Daredevils,15,4164,277.6000
+2013,Sunrisers Hyderabad,16,4336,271.0000
+2014,Kings XI Punjab,17,5974,351.4118
+2014,Chennai Super Kings,16,5300,331.2500
+2014,Mumbai Indians,15,4706,313.7333
+2014,Kolkata Knight Riders,15,4672,311.4667
+2014,Rajasthan Royals,13,4006,308.1538
+2014,Sunrisers Hyderabad,14,4204,300.2857
+2014,Royal Challengers Bangalore,14,4186,299.0000
+2014,Delhi Daredevils,14,4162,297.2857
+2015,Mumbai Indians,16,5468,341.7500
+2015,Rajasthan Royals,12,3892,324.3333
+2015,Chennai Super Kings,17,5450,320.5882
+2015,Sunrisers Hyderabad,14,4420,315.7143
+2015,Kolkata Knight Riders,13,4088,314.4615
+2015,Delhi Daredevils,13,3962,304.7692
+2015,Royal Challengers Bangalore,14,4218,301.2857
+2015,Kings XI Punjab,13,3624,278.7692
+2016,Royal Challengers Bangalore,16,5962,372.6250
+2016,Sunrisers Hyderabad,17,5346,314.4706
+2016,Mumbai Indians,14,4388,313.4286
+2016,Gujarat Lions,16,4900,306.2500
+2016,Kings XI Punjab,14,4268,304.8571
+2016,Kolkata Knight Riders,15,4526,301.7333
+2016,Delhi Daredevils,14,4208,300.5714
+2016,Rising Pune Supergiants,14,4126,294.7143
+2017,Gujarat Lions,13,4506,346.6154
+2017,Sunrisers Hyderabad,14,4698,335.5714
+2017,Mumbai Indians,16,5272,329.5000
+2017,Delhi Daredevils,14,4438,317.0000
+2017,Kings XI Punjab,14,4414,315.2857
+2017,Kolkata Knight Riders,16,4968,310.5000
+2017,Rising Pune Supergiant,16,4940,308.7500
+2017,Royal Challengers Bangalore,13,3690,283.8462
+2018,Chennai Super Kings,16,5618,351.1250
+2018,Kolkata Knight Riders,16,5518,344.8750
+2018,Mumbai Indians,14,4760,340.0000
+2018,Delhi Daredevils,14,4686,334.7143
+2018,Royal Challengers Bangalore,14,4644,331.7143
+2018,Sunrisers Hyderabad,17,5442,320.1176
+2018,Kings XI Punjab,14,4420,315.7143
+2018,Rajasthan Royals,15,4714,314.2667
+2019,Kolkata Knight Riders,13,4562,350.9231
+2019,Kings XI Punjab,14,4858,347.0000
+2019,Mumbai Indians,15,4998,333.2000
+2019,Rajasthan Royals,13,4306,331.2308
+2019,Royal Challengers Bangalore,13,4292,330.1538
+2019,Sunrisers Hyderabad,14,4576,326.8571
+2019,Delhi Capitals,15,4668,311.2000
+2019,Chennai Super Kings,17,4946,290.9412
+2020,Mumbai Indians,14,4716,336.8571
+2020,Kings XI Punjab,12,4004,333.6667
+2020,Delhi Capitals,16,5240,327.5000
+2020,Rajasthan Royals,14,4576,326.8571
+2020,Kolkata Knight Riders,13,4112,316.3077
+2020,Sunrisers Hyderabad,15,4732,315.4667
+2020,Chennai Super Kings,14,4382,313.0000
+2020,Royal Challengers Bangalore,14,4154,296.7143

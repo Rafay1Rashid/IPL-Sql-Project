@@ -1,0 +1,385 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .SFNS-Regular_wdth_opsz1B6E97_GRAD_wght1F40000;\f1\fnil\fcharset0 .SFNS-Regular_wdth_opsz16DC29_GRAD_wght1F40000;\f2\fnil\fcharset0 HelveticaNeue;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red247\green249\blue255;\red0\green0\blue0;
+\red255\green255\blue255;\red81\green92\blue117;\red255\green255\blue255;\red111\green144\blue180;\red120\green180\blue198;
+\red164\green121\blue157;\red147\green179\blue121;\red247\green249\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c1\c1;\cssrgb\c97494\c98282\c99999;\cssrgb\c0\c1\c1;
+\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c39034\c43763\c53469;\cssrgb\c100000\c100000\c99971;\cssrgb\c50882\c63471\c75893;\cssrgb\c53595\c75601\c81742;
+\cssrgb\c70655\c55748\c67759;\cssrgb\c63919\c74492\c54698;\cssrgb\c97375\c98161\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh18000\viewkind0
+\deftab720
+\pard\pardeftab720\sa274\partightenfactor0
+
+\f0\fs54\fsmilli27432 \cf2 \expnd0\expndtw0\kerning0
+IPL Data Analysis Project\
+\pard\pardeftab720\sa274\partightenfactor0
+
+\f1\fs48 \cf2 Introduction
+\fs45\fsmilli22860 \
+\pard\pardeftab720\sa274\partightenfactor0
+
+\f2\fs28 \cf2 This project focuses on analysing the Indian Premier League (IPL) dataset using SQL queries. The dataset includes information about matches, players, teams, venues, and performances. The goal of this project is to extract meaningful insights from the data, such as player performance, team statistics, match outcomes, and trends over the years. Below are the SQL queries used to analyse the data, along with a brief description of each query.
+\fs32 \
+\
+
+\fs48 Queries and Solutions\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf4 \cb5 -- 1. Count the total number of matches in the IPL dataset.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 2. Find the number of times each player has been awarded "Player of the Match".\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  player_of_match\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 3. Identify the player with the most "Player of the Match" awards each year.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 with\cf4  ranked_awards \cf4 as\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  \cf4 YEAR(\cf4 STR_TO_DATE\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 AS\cf4  yr\cf4 ,\cf4  player_of_match\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  NOA\cf4 ,\cf4 \
+    RANK\cf4 ()\cf4  \cf4 OVER\cf4  \cf4 (PARTITION\cf4  \cf4 BY\cf4  \cf4 YEAR(\cf4 STR_TO_DATE\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 ORDER\cf4  \cf4 BY\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 DESC)\cf4  \cf4 AS\cf4  rnk\
+    \cf4 FROM\cf4  ipl_matches\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  yr\cf4 ,\cf4  player_of_match\
+\cf4 )\cf4 \
+\cf4 select\cf4  yr\cf4 ,\cf4  player_of_match\cf4 ,\cf4  NOA \cf4 FROM\cf4  ranked_awards \cf4 where\cf4  rnk \cf4 =\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 4. Find the team that has won the most matches.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  winner\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc\cf4  \cf4 limit\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 5. Count the number of matches played at each venue.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  venue\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 6. Find the total runs scored by each batsman.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  batsman\cf4 ,\cf4  \cf4 sum\cf4 (\cf4 batsman_runs\cf4 )\cf4  \cf4 from\cf4  ipl_ball \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 7. Calculate the total runs scored in all matches.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 sum\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 from\cf4  ipl_ball\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 8. Find the percentage of runs scored by each batsman relative to the total runs.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  batsman\cf4 ,\cf4  \cf4 sum\cf4 (\cf4 batsman_runs\cf4 ),\cf4  \cf4 sum\cf4 (\cf4 batsman_runs\cf4 )/\cf4 sum\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 *\cf4  \cf4 100\cf4  \cf4 as\cf4  perc_runs \cf4 from\cf4  ipl_ball \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 9. Count the number of sixes hit by each batsman.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  batsman\cf4 ,\cf4  \cf4 count\cf4 (\cf4 batsman_runs\cf4 )\cf4  \cf4 from\cf4  ipl_ball \cf4 where\cf4  batsman_runs \cf4 >=\cf4  \cf4 6\cf4  \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 10. Count the number of fours hit by each batsman.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  batsman\cf4 ,\cf4  \cf4 count\cf4 (\cf4 batsman_runs\cf4 )\cf4  \cf4 from\cf4  ipl_ball \cf4 where\cf4  batsman_runs \cf4 =\cf4  \cf4 4\cf4  \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 11. Calculate the strike rate of batsmen who have scored at least 3000 runs.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 SELECT\cf4  batsman\cf4 ,\cf4  total_runs\cf4 ,\cf4  \cf4 (\cf4 total_runs \cf4 /\cf4  ball_faced\cf4 )\cf4  \cf4 *\cf4  \cf4 100\cf4  \cf4 AS\cf4  strike_rate\
+\cf4 FROM\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  batsman\cf4 ,\cf4  \cf4 SUM\cf4 (\cf4 batsman_runs\cf4 )\cf4  \cf4 AS\cf4  total_runs\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  ball_faced\
+    \cf4 FROM\cf4  ipl_ball\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  batsman\
+    \cf4 HAVING\cf4  \cf4 SUM\cf4 (\cf4 batsman_runs\cf4 )\cf4  \cf4 >=\cf4  \cf4 3000\cf4 \
+\cf4 )\cf4  \cf4 AS\cf4  abc\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 12. Calculate the economy rate of each bowler.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 WITH\cf4  total_overs \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  bowler\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 /\cf4  \cf4 6.0\cf4  \cf4 AS\cf4  no_of_overs  \
+    \cf4 FROM\cf4  ipl_ball\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  bowler\
+\cf4 ),\cf4 \
+cum_runs \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  bowler\cf4 ,\cf4  \cf4 SUM\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 AS\cf4  runs\
+    \cf4 FROM\cf4  ipl_ball\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  bowler\
+\cf4 )\cf4 \
+\cf4 SELECT\cf4  t\cf4 .\cf4 bowler\cf4 ,\cf4  c\cf4 .\cf4 runs \cf4 /\cf4  t\cf4 .\cf4 no_of_overs \cf4 AS\cf4  economy_rate\
+\cf4 FROM\cf4  total_overs t\
+\cf4 JOIN\cf4  cum_runs c \cf4 ON\cf4  t\cf4 .\cf4 bowler \cf4 =\cf4  c\cf4 .\cf4 bowler\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 13. Calculate the economy rate of bowlers who have bowled at least 50 overs.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 WITH\cf4  total_overs \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  bowler\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 /\cf4  \cf4 6.0\cf4  \cf4 AS\cf4  no_of_overs  \
+    \cf4 FROM\cf4  ipl_ball\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  bowler\
+    \cf4 having\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 /\cf4  \cf4 6.0\cf4  \cf4 >=\cf4  \cf4 50\cf4 \
+\cf4 ),\cf4 \
+cum_runs \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  bowler\cf4 ,\cf4  \cf4 SUM\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 AS\cf4  runs\
+    \cf4 FROM\cf4  ipl_ball\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  bowler\
+\cf4 )\cf4 \
+\cf4 SELECT\cf4  t\cf4 .\cf4 bowler\cf4 ,\cf4  c\cf4 .\cf4 runs \cf4 /\cf4  t\cf4 .\cf4 no_of_overs \cf4 AS\cf4  economy_rate\
+\cf4 FROM\cf4  total_overs t\
+\cf4 JOIN\cf4  cum_runs c \cf4 ON\cf4  t\cf4 .\cf4 bowler \cf4 =\cf4  c\cf4 .\cf4 bowler\
+\cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 14. Calculate the total number of matches played each year.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 sum\cf4 (\cf4 match_count\cf4 )\cf4 \
+\cf4 from\cf4 \
+\cf4 (select\cf4  \cf4 year(\cf4 str_to_date\cf4 (date,\cf4  \cf4 "%d-%m-%Y"\cf4 )),\cf4  \cf4 count\cf4 (*)\cf4  \cf4 as\cf4  match_count\
+\cf4 from\cf4  ipl_matches\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 )\cf4  \cf4 as\cf4  abc\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 15. Count the number of matches won by each team.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  winner\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 16. Calculate the percentage of matches where the toss winner also won the match.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 SELECT\cf4  \cf4 (SELECT\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 FROM\cf4  ipl_matches \cf4 WHERE\cf4  toss_winner \cf4 =\cf4  winner\cf4 )\cf4  \cf4 /\cf4  \cf4 (SELECT\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 FROM\cf4  ipl_matches\cf4 )\cf4  \cf4 *\cf4  \cf4 100\cf4  \cf4 AS\cf4  toss_win_percentage\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 17. Calculate the average score per season for each team.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 WITH\cf4  matches_per_team \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  \cf4 YEAR(\cf4 STR_TO_DATE\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 AS\cf4  \cf4 year,\cf4  team1 \cf4 AS\cf4  team\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  match_count\
+    \cf4 FROM\cf4  ipl_matches\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  \cf4 year,\cf4  team1\
+    \cf4 UNION\cf4  \cf4 ALL\cf4 \
+    \cf4 SELECT\cf4  \cf4 YEAR(\cf4 STR_TO_DATE\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 AS\cf4  \cf4 year,\cf4  team2 \cf4 AS\cf4  team\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  match_count\
+    \cf4 FROM\cf4  ipl_matches\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  \cf4 year,\cf4  team2\
+\cf4 ),\cf4 \
+runs_per_team \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  b\cf4 .\cf4 batting_team \cf4 AS\cf4  team\cf4 ,\cf4  \cf4 YEAR(\cf4 STR_TO_DATE\cf4 (\cf4 m\cf4 .date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 AS\cf4  match_year\cf4 ,\cf4  \cf4 SUM\cf4 (\cf4 b\cf4 .\cf4 total_runs\cf4 )\cf4  \cf4 AS\cf4  total_runs\
+    \cf4 FROM\cf4  ipl_ball b\
+    \cf4 JOIN\cf4  ipl_matches m \cf4 ON\cf4  b\cf4 .\cf4 id \cf4 =\cf4  m\cf4 .\cf4 id\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  b\cf4 .\cf4 batting_team\cf4 ,\cf4  match_year\
+\cf4 )\cf4 \
+\cf4 SELECT\cf4  mpt\cf4 .year,\cf4  mpt\cf4 .\cf4 team\cf4 ,\cf4  \cf4 SUM\cf4 (\cf4 mpt\cf4 .\cf4 match_count\cf4 )\cf4  \cf4 AS\cf4  total_matches\cf4 ,\cf4  \cf4 COALESCE(\cf4 SUM\cf4 (\cf4 rpt\cf4 .\cf4 total_runs\cf4 ),\cf4  \cf4 0\cf4 )\cf4  \cf4 AS\cf4  total_runs\cf4 ,\cf4  \cf4 COALESCE(\cf4 SUM\cf4 (\cf4 rpt\cf4 .\cf4 total_runs\cf4 )\cf4  \cf4 /\cf4  \cf4 SUM\cf4 (\cf4 mpt\cf4 .\cf4 match_count\cf4 ),\cf4  \cf4 0\cf4 )\cf4  \cf4 AS\cf4  avg_score_per_season\
+\cf4 FROM\cf4  matches_per_team mpt\
+\cf4 LEFT\cf4  \cf4 JOIN\cf4  runs_per_team rpt\
+    \cf4 ON\cf4  mpt\cf4 .year\cf4  \cf4 =\cf4  rpt\cf4 .\cf4 match_year \cf4 AND\cf4  mpt\cf4 .\cf4 team \cf4 =\cf4  rpt\cf4 .\cf4 team\
+\cf4 GROUP\cf4  \cf4 BY\cf4  mpt\cf4 .year,\cf4  mpt\cf4 .\cf4 team\
+\cf4 ORDER\cf4  \cf4 BY\cf4  mpt\cf4 .year,\cf4  avg_score_per_season \cf4 DESC;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 18. Count the number of times each team scored more than 200 runs in a match.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 SELECT\cf4  batting_team\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  match_count\
+\cf4 FROM\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  id\cf4 ,\cf4  batting_team\cf4 ,\cf4  \cf4 SUM\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 AS\cf4  rns\
+    \cf4 FROM\cf4  ipl_ball\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  id\cf4 ,\cf4  batting_team\
+    \cf4 HAVING\cf4  \cf4 SUM\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 >\cf4  \cf4 200\cf4 \
+\cf4 )\cf4  \cf4 AS\cf4  abc\
+\cf4 GROUP\cf4  \cf4 BY\cf4  batting_team\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 19. Find the top 10 batsmen with the most runs.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  batsman\cf4 ,\cf4  \cf4 sum\cf4 (\cf4 batsman_runs\cf4 )\cf4  \cf4 from\cf4  ipl_ball \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc\cf4  \cf4 limit\cf4  \cf4 10\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 20. Find the top wicket-taking bowlers.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  bowler\cf4 ,\cf4  \cf4 sum\cf4 (\cf4 is_wicket\cf4 )\cf4  \cf4 from\cf4  ipl_ball \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 21. Count the number of matches played each year.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 year(\cf4 str_to_date\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 AS\cf4  yr\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 22. Calculate the total runs scored in each match per year.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 year(\cf4 str_to_date\cf4 (\cf4 m\cf4 .date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 as\cf4  yr\cf4 ,\cf4  b\cf4 .\cf4 id\cf4 ,\cf4  \cf4 sum\cf4 (\cf4 b\cf4 .\cf4 total_runs\cf4 )\cf4  \cf4 as\cf4  tot_rns\
+\cf4 from\cf4  ipl_ball b\
+\cf4 join\cf4  ipl_matches m\
+\cf4 on\cf4  m\cf4 .\cf4 id \cf4 =\cf4  b\cf4 .\cf4 id\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ,\cf4  \cf4 2\cf4 \
+\cf4 order\cf4  \cf4 by\cf4  \cf4 1\cf4 ,\cf4  \cf4 2\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 23. Count the number of matches umpired by each umpire.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  umpire1\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4 \
+\cf4 from\cf4 \
+\cf4 (select\cf4  umpire1\
+\cf4 from\cf4  ipl_matches\
+\cf4 union\cf4  \cf4 all\cf4 \
+\cf4 select\cf4  umpire2\
+\cf4 from\cf4  ipl_matches\cf4 )\cf4  \cf4 as\cf4  abc\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 \
+\cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 24. Count the number of tosses won by each team.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  toss_winner\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 25. Analyze the toss decisions of the team with the most toss wins.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  toss_decision\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4 \
+\cf4 from\cf4  ipl_matches\
+\cf4 where\cf4  toss_winner \cf4 =\cf4  \
+\cf4 (select\cf4  toss_winner\
+\cf4 from\cf4 \
+\cf4 (select\cf4  toss_winner\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4 \
+\cf4 from\cf4  ipl_matches\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 \
+\cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc\cf4 \
+\cf4 limit\cf4  \cf4 1\cf4 )\cf4  \cf4 as\cf4  abc\
+\cf4 )\cf4 \
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 26. Count the number of toss decisions (field/bat) per year.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 year(\cf4 str_to_date\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 as\cf4  yr\cf4 ,\cf4  toss_decision\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4 \
+\cf4 from\cf4  ipl_matches\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ,\cf4  \cf4 2\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 27. Calculate the percentage of matches where the toss winner won the match.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 with\cf4  all_matches \cf4 as\cf4  \cf4 (select\cf4  \cf4 count\cf4 (*)\cf4  \cf4 as\cf4  total_matches\
+\cf4 from\cf4  ipl_matches\cf4 ),\cf4 \
+TWM \cf4 as\cf4  \cf4 (select\cf4  \cf4 count\cf4 (*)\cf4  \cf4 as\cf4  toss_winning_matches\
+\cf4 from\cf4  ipl_matches\
+\cf4 where\cf4  toss_winner \cf4 =\cf4  winner\cf4 )\cf4 \
+\cf4 select\cf4  t\cf4 .\cf4 toss_winning_matches\cf4 /\cf4 a\cf4 .\cf4 total_matches \cf4 *\cf4  \cf4 100\cf4 \
+\cf4 from\cf4  all_matches a\
+\cf4 join\cf4  TWM t\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 28. Count the number of matches won by wickets.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 where\cf4  result \cf4 =\cf4  \cf4 'wickets'\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 29. Find the team that won the most matches in the final of each season.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  winner\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 as\cf4  times_won\
+\cf4 from\cf4 \
+\cf4 (select\cf4  winner\cf4 ,\cf4  \cf4 year(\cf4 str_to_date\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4 \
+\cf4 from\cf4  ipl_matches\
+\cf4 where\cf4  id \cf4 in\cf4  \
+\cf4 (select\cf4  id\
+\cf4 from\cf4 \
+\cf4 (with\cf4  ranked_matches \cf4 as\cf4  \cf4 (select\cf4  id\cf4 ,\cf4  \cf4 year(\cf4 str_to_date\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 as\cf4  yr\cf4 ,\cf4  rank\cf4 ()\cf4  \cf4 over(partition\cf4  \cf4 by\cf4  \cf4 year(\cf4 str_to_date\cf4 (date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 order\cf4  \cf4 by\cf4  id \cf4 desc)\cf4  \cf4 as\cf4  rnk\
+\cf4 from\cf4  ipl_matches\cf4 )\cf4 \
+\cf4 select\cf4  \cf4 *\cf4  \cf4 from\cf4  ranked_matches \cf4 where\cf4  rnk \cf4 =\cf4  \cf4 1\cf4 )\cf4  \cf4 as\cf4  abc\
+  \cf4 )\cf4 \
+\cf4 )\cf4  \cf4 as\cf4  xyz\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 30. Calculate the winning percentage of each team.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 with\cf4  total_matches \cf4 as\cf4  \cf4 (select\cf4  team1\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 as\cf4  TM\
+\cf4 from\cf4 \
+\cf4 (select\cf4  team1\
+\cf4 from\cf4  ipl_matches\
+\cf4 union\cf4  \cf4 all\cf4 \
+\cf4 select\cf4  team2\
+\cf4 from\cf4  ipl_matches\cf4 )\cf4  \cf4 as\cf4  abc\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ),\cf4 \
+WM \cf4 as\cf4  \cf4 (select\cf4  winner\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 as\cf4  WM\
+\cf4 from\cf4  ipl_matches\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 )\cf4 \
+\cf4 select\cf4  w\cf4 .\cf4 winner\cf4 ,\cf4  w\cf4 .\cf4 WM\cf4 /\cf4 t\cf4 .\cf4 TM \cf4 *\cf4 100\cf4  \cf4 as\cf4  winning_percentage\
+\cf4 from\cf4  total_matches t\
+\cf4 join\cf4  WM w\
+\cf4 on\cf4  t\cf4 .\cf4 team1 \cf4 =\cf4  w\cf4 .\cf4 winner\
+\cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc\cf4 \
+\cf4 limit\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 31. Find the venue where each team has won the most matches.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 WITH\cf4  ranked_venues \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  winner\cf4 ,\cf4  venue\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  MWOLS\cf4 ,\cf4  RANK\cf4 ()\cf4  \cf4 OVER(PARTITION\cf4  \cf4 BY\cf4  winner \cf4 ORDER\cf4  \cf4 BY\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 DESC)\cf4  \cf4 AS\cf4  rnk\
+    \cf4 FROM\cf4  ipl_matches\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  winner\cf4 ,\cf4  venue\
+\cf4 ),\cf4 \
+TOTAL_MATCHES_WON \cf4 AS\cf4  \cf4 (\cf4 \
+    \cf4 SELECT\cf4  winner\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  TMW\
+    \cf4 FROM\cf4  ipl_matches\
+    \cf4 GROUP\cf4  \cf4 BY\cf4  winner\
+\cf4 )\cf4 \
+\cf4 SELECT\cf4  r\cf4 .\cf4 winner\cf4 ,\cf4  r\cf4 .\cf4 venue\cf4 ,\cf4  \cf4 (\cf4 r\cf4 .\cf4 MWOLS \cf4 /\cf4  t\cf4 .\cf4 TMW\cf4 )\cf4  \cf4 *\cf4  \cf4 100\cf4  \cf4 AS\cf4  percentage_wins_at_venue\
+\cf4 FROM\cf4  ranked_venues r\
+\cf4 JOIN\cf4  TOTAL_MATCHES_WON t \cf4 ON\cf4  t\cf4 .\cf4 winner \cf4 =\cf4  r\cf4 .\cf4 winner\
+\cf4 WHERE\cf4  r\cf4 .\cf4 rnk \cf4 =\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 32. Find the team with the highest margin of victory by runs.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  winner\cf4 ,\cf4  result\cf4 ,\cf4  \cf4 sum\cf4 (\cf4 result_margin\cf4 )\cf4 \
+\cf4 from\cf4  ipl_matches\
+\cf4 where\cf4  result \cf4 =\cf4  \cf4 'runs'\cf4 \
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ,\cf4  \cf4 2\cf4 \
+\cf4 order\cf4  \cf4 by\cf4  \cf4 3\cf4  \cf4 desc\cf4 \
+\cf4 limit\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 33. Count the number of matches won by wickets.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  result\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 where\cf4  result \cf4 =\cf4  \cf4 'wickets'\cf4  \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 34. Count the number of matches played at each stadium.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  venue \cf4 as\cf4  stadium\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 35. Find the player with the most "Player of the Match" awards.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  player_of_match\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4  \cf4 from\cf4  ipl_matches \cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4  \cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc\cf4  \cf4 limit\cf4  \cf4 1\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 36. Count the number of sixes hit each year.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 SELECT\cf4  \cf4 YEAR(\cf4 STR_TO_DATE\cf4 (\cf4 m\cf4 .date,\cf4  \cf4 '%d-%m-%Y'\cf4 ))\cf4  \cf4 AS\cf4  match_year\cf4 ,\cf4  \cf4 COUNT\cf4 (*)\cf4  \cf4 AS\cf4  sixes_count\
+\cf4 FROM\cf4  ipl_ball b\
+\cf4 JOIN\cf4  ipl_matches m\
+\cf4 ON\cf4  b\cf4 .\cf4 id \cf4 =\cf4  m\cf4 .\cf4 id\
+\cf4 WHERE\cf4  b\cf4 .\cf4 total_runs \cf4 =\cf4  \cf4 6\cf4 \
+\cf4 GROUP\cf4  \cf4 BY\cf4  match_year\cf4 ;\cf4 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 -- 37. Find the team that has scored more than 200 runs the most times.\cf4 \
+\pard\pardeftab720\partightenfactor0
+\cf4 select\cf4  batting_team\cf4 ,\cf4  \cf4 count\cf4 (*)\cf4 \
+\cf4 from\cf4 \
+\cf4 (select\cf4  \cf4 sum\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 as\cf4  cum_runs\cf4 ,\cf4  batting_team\cf4 ,\cf4  id\
+\cf4 from\cf4  ipl_ball\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 2\cf4 ,\cf4  \cf4 3\cf4 \
+\cf4 having\cf4  \cf4 sum\cf4 (\cf4 total_runs\cf4 )\cf4  \cf4 >\cf4  \cf4 200\cf4 )\cf4  \cf4 as\cf4  abc\
+\cf4 group\cf4  \cf4 by\cf4  \cf4 1\cf4 \
+\cf4 order\cf4  \cf4 by\cf4  \cf4 2\cf4  \cf4 desc\cf4 \
+\cf4 limit\cf4  \cf4 1\cf4 ;\cf4 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs25\fsmilli12573 \cf4 \
+\
+
+\fs48 \
+Conclusion\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf2 \cb1 This project provides a comprehensive analysis of the IPL dataset using SQL. The queries cover various aspects of the data, including player performance, team statistics, match outcomes, and trends over the years. The insights gained from this analysis can be used to understand the dynamics of the IPL and make data-driven decisions. Feel free to explore the queries and adapt them to your needs!\cf4 \cb5 \
+}
